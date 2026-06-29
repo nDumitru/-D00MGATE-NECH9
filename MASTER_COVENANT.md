@@ -46,5 +46,5 @@ Heir identity: undisclosed. Heir does not know they hold a fragment.
 ---
 
 *Sealed by the author. Witnessed by the DAG. Permanent.*
-*"De 7 ori cate 7." - Not 49. Not static. Not what you think it means.*
+*"7 times 7." - Not 49. Not static. Not what you think it means.*
 *Dumitru Nechita, Brasov, Romania, 2026*
