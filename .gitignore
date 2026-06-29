@@ -1,0 +1,8 @@
+# MASTER KEY - NEVER COMMIT
+core/master_key.adb
+
+# Build artifacts
+build/
+*.o
+*.ali
+*.bexch
