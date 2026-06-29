@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>D00MGATE-NECH9 | Post-Quantum Security Protocol</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@300;400;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{--void:#020408;--deep:#060d14;--panel:#0a1520;--border:#0e2235;--cyan:#00d4ff;--cyan2:#0099cc;--red:#ff2244;--gold:#f0a500;--green:#00ff88;--white:#e8f4f8;--muted:#4a7a99;--mono:'Share Tech Mono',monospace;--display:'Rajdhani',sans-serif;--body:'Inter',sans-serif}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--void);color:var(--white);font-family:var(--body);overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,212,255,.012) 2px,rgba(0,212,255,.012) 4px);pointer-events:none;z-index:9999}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 2rem;height:56px;background:rgba(2,4,8,.95);border-bottom:1px solid var(--border);backdrop-filter:blur(12px)}
+.nav-logo{font-family:var(--mono);font-size:1rem;color:var(--cyan);text-decoration:none;letter-spacing:.15em}
+.nav-logo span{color:var(--red)}
+.nav-links{display:flex;gap:1.5rem;list-style:none}
+.nav-links a{font-family:var(--display);font-size:.85rem;font-weight:600;letter-spacing:.1em;color:var(--muted);text-decoration:none;text-transform:uppercase;transition:color .2s}
+.nav-links a:hover{color:var(--cyan)}
+
+/* HERO */
+#hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:6rem 2rem 4rem;position:relative;overflow:hidden}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(0,212,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(0,212,255,.04) 1px,transparent 1px);background-size:60px 60px;animation:gridPulse 8s ease-in-out infinite}
+.hero-glow{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:600px;height:600px;background:radial-gradient(circle,rgba(0,212,255,.06) 0%,transparent 70%);pointer-events:none}
+@keyframes gridPulse{0%,100%{opacity:.5}50%{opacity:1}}
+.eyebrow{font-family:var(--mono);font-size:.72rem;letter-spacing:.35em;color:var(--cyan);text-transform:uppercase;margin-bottom:1.5rem;position:relative}
+.eyebrow::before,.eyebrow::after{content:'--';margin:0 .5rem;opacity:.5}
+h1{font-family:var(--display);font-size:clamp(3rem,8vw,7rem);font-weight:700;letter-spacing:.05em;line-height:.95;position:relative}
+h1 .d{color:var(--white)}h1 .g{color:var(--cyan)}h1 .sep{color:var(--red)}h1 .n{color:var(--gold)}
+.hero-sub{font-family:var(--mono);font-size:.85rem;color:var(--muted);letter-spacing:.2em;margin:.75rem 0 1.5rem;position:relative}
+.hero-tag{font-family:var(--display);font-size:clamp(.9rem,2vw,1.2rem);font-weight:300;color:rgba(232,244,248,.7);max-width:640px;margin-bottom:2.5rem;font-style:italic;position:relative}
+.cta{display:flex;gap:.75rem;flex-wrap:wrap;justify-content:center;position:relative}
+.btn{font-family:var(--display);font-size:.9rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;padding:.8rem 2rem;border:1px solid;cursor:pointer;transition:all .25s;display:inline-block}
+.btn-p{background:var(--cyan);border-color:var(--cyan);color:var(--void)}.btn-p:hover{background:transparent;color:var(--cyan);box-shadow:0 0 30px rgba(0,212,255,.3)}
+.btn-r{background:transparent;border-color:var(--red);color:var(--red)}.btn-r:hover{background:var(--red);color:var(--void)}
+.btn-g{background:transparent;border-color:var(--gold);color:var(--gold)}.btn-g:hover{background:var(--gold);color:var(--void)}
+.chevrons{display:flex;gap:.35rem;justify-content:center;margin-top:3rem;position:relative}
+.chev{width:34px;height:8px;background:var(--border)}
+.chev.on{background:var(--cyan);box-shadow:0 0 10px rgba(0,212,255,.6);animation:cp 2s ease-in-out infinite}
+.chev.on:nth-child(8){background:var(--gold);box-shadow:0 0 10px rgba(240,165,0,.6)}
+.chev.cls{background:var(--red);box-shadow:0 0 12px rgba(255,34,68,.8);animation:cp .8s ease-in-out infinite}
+@keyframes cp{0%,100%{opacity:1}50%{opacity:.4}}
+.chev-lbl{font-family:var(--mono);font-size:.6rem;color:var(--muted);text-align:center;margin-top:.5rem;letter-spacing:.15em}
+
+/* SECTIONS */
+.sec{padding:5rem 2rem;max-width:1200px;margin:0 auto}
+.sec-full{padding:5rem 2rem}.sec-inner{max-width:1200px;margin:0 auto}
+.sec-eye{font-family:var(--mono);font-size:.68rem;letter-spacing:.3em;color:var(--cyan);text-transform:uppercase;margin-bottom:.75rem}
+h2{font-family:var(--display);font-size:clamp(1.8rem,4vw,3rem);font-weight:700;letter-spacing:.03em;margin-bottom:.75rem;line-height:1.1}
+.divider{width:60px;height:2px;background:linear-gradient(90deg,var(--cyan),transparent);margin-bottom:2.5rem}
+.cy{color:var(--cyan)}.rd{color:var(--red)}.gd{color:var(--gold)}.gn{color:var(--green)}
+
+/* LAYERS */
+.layers-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:1px;background:var(--border);border:1px solid var(--border)}
+.lc{background:var(--deep);padding:1.75rem;position:relative;overflow:hidden;transition:background .3s}
+.lc:hover{background:var(--panel)}
+.lc::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%}
+.lc.bc::before{background:var(--cyan)}.lc.bg::before{background:var(--green)}.lc.bo::before{background:var(--gold)}.lc.br::before{background:var(--red);animation:cp .8s infinite}
+.lc-num{font-family:var(--mono);font-size:.65rem;letter-spacing:.2em;margin-bottom:.4rem}
+.lc-name{font-family:var(--display);font-size:1.2rem;font-weight:700;margin-bottom:.6rem}
+.lc-desc{font-size:.85rem;color:rgba(232,244,248,.65);line-height:1.7}
+.tag{display:inline-block;font-family:var(--mono);font-size:.62rem;padding:.18rem .55rem;border:1px solid;margin-top:.75rem;letter-spacing:.1em}
+.tc{border-color:var(--cyan);color:var(--cyan)}.tg{border-color:var(--gold);color:var(--gold)}.tr{border-color:var(--red);color:var(--red)}.tn{border-color:var(--green);color:var(--green)}
+
+/* CTF */
+.prize-box{background:linear-gradient(135deg,var(--panel) 0%,rgba(0,212,255,.05) 100%);border:1px solid var(--cyan);padding:2.5rem;margin-bottom:2rem;position:relative}
+.prize-amt{font-family:var(--display);font-size:clamp(2rem,5vw,4.5rem);font-weight:700;color:var(--gold);line-height:1;margin-bottom:.35rem}
+.split-row{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);margin-top:1.5rem}
+.split-cell{background:var(--panel);padding:1.25rem;text-align:center}
+.split-pct{font-family:var(--display);font-size:2.2rem;font-weight:700;line-height:1;margin-bottom:.3rem}
+.split-lbl{font-family:var(--mono);font-size:.65rem;letter-spacing:.1em;color:var(--muted);text-transform:uppercase}
+.ctf-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);margin-top:2rem}
+.ctf-card{background:var(--deep);padding:1.5rem}
+.ctf-lvl{font-family:var(--mono);font-size:.65rem;color:var(--muted);margin-bottom:.4rem}
+.ctf-name{font-family:var(--display);font-size:1.1rem;font-weight:700;margin-bottom:.4rem}
+.ctf-desc{font-size:.82rem;color:rgba(232,244,248,.6);margin-bottom:.75rem}
+.st{font-family:var(--mono);font-size:.62rem;padding:.18rem .55rem;border:1px solid}
+.st-open{border-color:var(--green);color:var(--green)}.st-partial{border-color:var(--gold);color:var(--gold)}.st-locked{border-color:var(--red);color:var(--red)}.st-theory{border-color:var(--muted);color:var(--muted)}
+
+/* LEADERBOARD */
+.lb-wrap{overflow-x:auto;border:1px solid var(--border)}
+table{width:100%;border-collapse:collapse;font-size:.83rem;min-width:900px}
+th{font-family:var(--mono);font-size:.62rem;letter-spacing:.1em;color:var(--muted);text-align:left;padding:.65rem .85rem;background:var(--deep);border-bottom:2px solid var(--cyan);text-transform:uppercase}
+td{padding:.8rem .85rem;border-bottom:1px solid var(--border);vertical-align:middle}
+tr:hover td{background:var(--panel)}
+tr.placeholder td{opacity:.4}
+.ai-badge{font-family:var(--mono);font-size:.6rem;padding:.15rem .5rem;border:1px solid}
+.ah{border-color:var(--green);color:var(--green)}.aa{border-color:var(--cyan);color:var(--cyan)}.ai{border-color:var(--gold);color:var(--gold)}.at{border-color:var(--white);color:var(--white)}
+.pip{display:inline-block;width:18px;height:5px;margin-right:2px;background:var(--border);vertical-align:middle}
+.pbar{background:var(--border);height:4px;width:80px;margin-top:3px}.pbfill{height:100%;background:linear-gradient(90deg,var(--cyan),var(--gold))}
+.threshold-box{background:var(--panel);border:1px solid var(--gold);border-left:3px solid var(--gold);padding:1.25rem 1.5rem;margin-bottom:1.5rem;display:flex;align-items:center;gap:2rem;flex-wrap:wrap}
+.pool-bar-wrap{flex:1;min-width:200px}
+.pool-bar{height:5px;background:var(--border);margin-top:.5rem}.pool-fill{height:100%;background:linear-gradient(90deg,var(--gold),var(--cyan));transition:width 1s}
+.layer-prize-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);margin-top:1.5rem}
+.lp-card{background:var(--deep);padding:1rem;text-align:center}.lp-card.locked{opacity:.4}
+.lp-num{font-family:var(--mono);font-size:.58rem;color:var(--muted);margin-bottom:.3rem;letter-spacing:.15em}
+.lp-name{font-family:var(--display);font-size:.82rem;font-weight:700;margin-bottom:.4rem}
+.lp-amt{font-family:var(--display);font-size:1.15rem;font-weight:700;color:var(--gold)}
+.lp-pct{font-family:var(--mono);font-size:.58rem;color:var(--muted);margin-top:.2rem}
+.ai-detection{background:var(--deep);border:1px solid var(--border);border-left:3px solid var(--red);padding:1.75rem;margin-top:2rem}
+
+/* ROADMAP */
+.roadmap{position:relative;padding-left:2rem;margin-top:1.5rem}
+.roadmap::before{content:'';position:absolute;left:0;top:0;bottom:0;width:1px;background:linear-gradient(180deg,var(--cyan),var(--gold),var(--red),transparent)}
+.rm-item{position:relative;padding:0 0 2.5rem 2rem}
+.rm-item::before{content:'';position:absolute;left:-5px;top:5px;width:10px;height:10px;border:1px solid var(--cyan);background:var(--void);transform:rotate(45deg)}
+.rm-item.active::before{background:var(--cyan);box-shadow:0 0 10px var(--cyan)}
+.rm-item.gold::before{border-color:var(--gold);background:var(--gold);box-shadow:0 0 10px var(--gold)}
+.rm-item.future::before{border-color:var(--muted)}
+.rm-date{font-family:var(--mono);font-size:.68rem;color:var(--cyan);margin-bottom:.3rem}
+.rm-title{font-family:var(--display);font-size:1.15rem;font-weight:700;margin-bottom:.3rem}
+.rm-desc{font-size:.83rem;color:rgba(232,244,248,.6)}
+
+/* REVENUE */
+.rev-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-top:1.5rem}
+.rev-card{background:var(--deep);border:1px solid var(--border);padding:1.75rem}
+.rev-card h3{font-family:var(--display);font-size:1rem;font-weight:700;color:var(--cyan);margin-bottom:1rem}
+.rev-card ul{list-style:none;font-size:.83rem;color:rgba(232,244,248,.7)}
+.rev-card ul li{padding:.4rem 0;border-bottom:1px solid var(--border);padding-left:1rem;position:relative}
+.rev-card ul li::before{content:'>';position:absolute;left:0;color:var(--cyan);font-family:var(--mono)}
+
+/* FOUNDER */
+.founder-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start}
+.founder-quote{font-family:var(--display);font-size:clamp(1.2rem,2.5vw,1.8rem);font-weight:300;font-style:italic;color:rgba(232,244,248,.8);border-left:3px solid var(--cyan);padding-left:1.75rem;margin-bottom:1.75rem;line-height:1.5}
+.founder-name{font-family:var(--mono);font-size:.82rem;color:var(--cyan);letter-spacing:.2em;margin-bottom:.25rem}
+.founder-title{font-size:.78rem;color:var(--muted)}
+.founder-ro{background:var(--panel);border:1px solid var(--border);border-left:3px solid var(--gold);padding:1.75rem;font-size:.87rem;line-height:1.8;color:rgba(232,244,248,.75)}
+.founder-ro h3{font-family:var(--display);font-size:1rem;font-weight:700;color:var(--gold);margin-bottom:.75rem}
+
+/* TERMINAL */
+.terminal{background:#010508;border:1px solid var(--border);border-top:3px solid var(--cyan);font-family:var(--mono);font-size:.8rem;padding:1.25rem;margin-top:1.5rem}
+.tbar{display:flex;gap:.35rem;margin-bottom:1rem}
+.dot{width:10px;height:10px;border-radius:50%}
+.cursor{display:inline-block;width:8px;height:1em;background:var(--cyan);vertical-align:text-bottom;animation:blink 1s step-end infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+.tp{color:var(--cyan)}.tc2{color:var(--white)}.to{color:rgba(232,244,248,.5)}.ts{color:var(--green)}.te{color:var(--red)}.tg2{color:var(--gold)}
+
+/* SPONSORS */
+.spon-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(185px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);margin-top:1.5rem}
+.spon-slot{background:var(--deep);padding:1.75rem;text-align:center;border:2px dashed transparent;transition:all .3s;cursor:pointer}
+.spon-slot:hover{border-color:var(--cyan);background:var(--panel)}
+.slon-lbl{font-family:var(--mono);font-size:.65rem;color:var(--muted);text-transform:uppercase;letter-spacing:.15em;margin-bottom:.4rem}
+.slon-name{font-family:var(--display);font-size:.95rem;font-weight:700}
+
+/* FOOTER */
+footer{background:var(--void);border-top:1px solid var(--border);padding:3rem 2rem;text-align:center}
+.ft-logo{font-family:var(--mono);font-size:1.3rem;color:var(--cyan);letter-spacing:.2em;margin-bottom:.4rem}
+.ft-tag{font-family:var(--mono);font-size:.65rem;color:var(--muted);letter-spacing:.2em;margin-bottom:1.5rem}
+.ft-links{display:flex;gap:1.5rem;justify-content:center;flex-wrap:wrap;margin-bottom:1.5rem}
+.ft-links a{font-family:var(--display);font-size:.82rem;color:var(--muted);text-decoration:none;transition:color .2s}.ft-links a:hover{color:var(--cyan)}
+.ft-legal{font-size:.72rem;color:rgba(74,122,153,.6);line-height:1.8}
+
+/* LANG */
+#lang-bar{position:fixed;bottom:1.25rem;right:1.25rem;z-index:200;display:flex;flex-wrap:wrap;gap:.35rem;justify-content:flex-end;max-width:300px}
+.lb2{font-family:var(--mono);font-size:.62rem;padding:.2rem .55rem;background:rgba(6,13,20,.92);border:1px solid var(--border);color:var(--muted);cursor:pointer;transition:all .2s;backdrop-filter:blur(8px)}
+.lb2:hover{border-color:var(--cyan);color:var(--cyan)}.lb2.active{border-color:var(--cyan)!important;color:var(--cyan)!important;background:rgba(0,212,255,.1)!important}
+
+@media(max-width:768px){.nav-links{display:none}.rev-grid,.founder-grid{grid-template-columns:1fr}.split-row{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+<a href="#hero" class="nav-logo">D00MGATE<span>·</span>NECH9</a>
+<ul class="nav-links">
+  <li><a href="#layers" id="nav-arch">Architecture</a></li>
+  <li><a href="#competition" id="nav-ctf">CTF</a></li>
+  <li><a href="#leaderboard" id="nav-lb">Leaderboard</a></li>
+  <li><a href="#roadmap" id="nav-road">Roadmap</a></li>
+  <li><a href="#sponsors" id="nav-spon">Sponsors</a></li>
+  <li><a href="#founder" id="nav-found">Founder</a></li>
+  <li><a href="https://github.com/nDumitru/D00MGATE-NECH9" target="_blank">GitHub ↗</a></li>
+</ul>
+</nav>
+
+<!-- HERO -->
+<div id="hero">
+<div class="hero-grid"></div><div class="hero-glow"></div>
+<p class="eyebrow" id="hero-eyebrow">Post-Quantum Security Protocol</p>
+<h1><span class="d">D00M</span><span class="g">GATE</span><span class="sep">·</span><span class="n">NECH9</span></h1>
+<p class="hero-sub" id="hero-sub">v1.0.0 · 10 Layers · by Dumitru Nechita</p>
+<p class="hero-tag" id="hero-tag">"Built on Four Races, Three Laws, Ten Layers, and the Wisdom of 49."<br>The first protocol that grows <strong>stronger under attack</strong>.</p>
+<div class="cta">
+  <a href="#competition" class="btn btn-p" id="btn-ctf">Enter CTF Challenge</a>
+  <a href="#layers" class="btn btn-r" id="btn-arch">Explore Architecture</a>
+  <a href="#sponsors" class="btn btn-g" id="btn-spon">Become Sponsor</a>
+</div>
+<div>
+  <div class="chevrons">
+    <div class="chev on"></div><div class="chev on"></div><div class="chev on"></div>
+    <div class="chev on"></div><div class="chev on"></div><div class="chev on"></div>
+    <div class="chev on"></div><div class="chev on"></div><div class="chev cls"></div>
+  </div>
+  <p class="chev-lbl" id="chev-lbl">CHEVRON 9 — CLASSIFIED</p>
+</div>
+</div>
+
+<!-- LAYERS -->
+<section class="sec" id="layers">
+<p class="sec-eye" id="arch-eye">Architecture</p>
+<h2 id="arch-h2">10 Layers.<br><span class="cy">10 Chevrons.</span></h2>
+<div class="divider"></div>
+<div class="layers-grid">
+  <div class="lc bc"><p class="lc-num cy">LAYER 0</p><p class="lc-name">Asimov Protocol</p><p class="lc-desc">Three hard-coded laws in Ada kernel. Cannot be overridden by any external input — not even the author. Law 1: never compromise user. Law 2: obey only Master Key. Law 3: replicate before destruction.</p><span class="tag tc">ADA KERNEL</span></div>
+  <div class="lc bc"><p class="lc-num cy">LAYER 1</p><p class="lc-name">Identity + Spooner Guard</p><p class="lc-desc">Dynamic Luhn token (30s window) + Spooner Behavioral Guard with 47 simultaneous vectors. A stolen key that doesn't behave like the owner is flagged instantly.</p><span class="tag tc">LUHN DYNAMIC</span></div>
+  <div class="lc bc"><p class="lc-num cy">LAYER 2</p><p class="lc-name">NS5 Mesh Routing</p><p class="lc-desc">Modified Kademlia DHT with hive node consciousness. Compromised node quarantined in milliseconds. 3-hop minimum onion. Dark Tunnel steganographic secondary channel.</p><span class="tag tc">HIVE MESH</span></div>
+  <div class="lc bn" style="--c:var(--green)"><p class="lc-num gn">LAYER 3</p><p class="lc-name">Quantum-Safe Transfer</p><p class="lc-desc">CRYSTALS-Kyber key exchange (NIST PQC 2024). ChaCha20-Poly1305 encryption. BLAKE3 Merkle Tree integrity. Resistant to Shor's algorithm.</p><span class="tag tn">NIST PQC 2024</span></div>
+  <div class="lc" style="border-left:3px solid var(--green)"><p class="lc-num gn">LAYER 4</p><p class="lc-name">DAG Ledger</p><p class="lc-desc">Directed Acyclic Graph. No ECC. No miners. SPHINCS+ hash-based signatures. Quantum-safe. Permanent. Each entry validates two previous.</p><span class="tag tn">SPHINCS+ · NO ECC</span></div>
+  <div class="lc bo"><p class="lc-num gd">LAYER 5</p><p class="lc-name">The Four Races</p><p class="lc-desc">Ancient: Zero-Point Entropy. Asgard: Biometric Shamir fragments. Ori: Unanimous 9-factor consensus. Replicator: Self-mutating protocol — attacker who studied v.N faces v.N+1.</p><span class="tag tg">FOUR RACES</span></div>
+  <div class="lc bo"><p class="lc-num gd">LAYER 6</p><p class="lc-name">Iris + VIKI Defense</p><p class="lc-desc">Iris: intrusion triggers active honeypot + key rotation. VIKI Engine: rules rewrite themselves after each attack. System that learns every intrusion pattern.</p><span class="tag tg">ACTIVE DEFENSE</span></div>
+  <div class="lc bo"><p class="lc-num gd">LAYER 7</p><p class="lc-name">I, Robot Extension</p><p class="lc-desc">VIKI adaptive rules + NS5 hive consciousness + Spooner behavioral detection + Dark Tunnel channel. Five systems as one unified intelligence.</p><span class="tag tg">I, ROBOT</span></div>
+  <div class="lc bo"><p class="lc-num gd">LAYER 8</p><p class="lc-name">The Convergence</p><p class="lc-desc">Wraith: absorbs attacks, grows stronger. Matrix: perfect decoy + intel harvest. Dune: predicts attacks before arrival. Terminator: autonomous repair + topology morph. Sustained attack is fuel.</p><span class="tag tg">CONVERGENCE</span></div>
+  <div class="lc bo"><p class="lc-num gd">VERIDEX (L10)</p><p class="lc-name">VERIDEX — Veritas non moritur.</p><p class="lc-desc">Original concept: Dumitru Nechita. P1: WeepingAngel (invisible under observation) + Silence (zero-trace ops). P2: TimeLock + OMEGA·49 asymmetric windows. P3: Epigenetic key + Precursor matter + JunkDNA 98.5% noise. P4: Gravemind absorption + The Ark rebuild + Regeneration.</p><span class="tag tg">VERIDEX</span></div>
+  <div class="lc br" style="grid-column:1/-1;background:#080204"><p class="lc-num rd">LAYER 9 — CLASSIFIED</p><p class="lc-name rd">OMEGA·49</p><p class="lc-desc">"De 7 ori câte 7." — Not 49. Not static. Not what you think it means. A dynamic recursive sequence on domain {-7..−1, 1..7}. Zero excluded. Negative values create non-commutativity. Seed: Delta Nechita. Depth: unknown. Operation: unknown. The 9th Chevron has never been reached.</p><span class="tag tr">NO PUBLIC INTERFACE</span><span class="tag tr" style="margin-left:.4rem">DELTA NECHITA</span></div>
+</div>
+
+<!-- ORIGINAL CONCEPTS -->
+<div style="margin-top:3rem;background:var(--panel);border:1px solid var(--border);border-left:3px solid var(--cyan);padding:2rem">
+<p style="font-family:var(--mono);font-size:.65rem;color:var(--cyan);letter-spacing:.2em;margin-bottom:1rem">ORIGINAL CONCEPTS BY DUMITRU NECHITA</p>
+<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:1.5rem">
+  <div><p style="font-family:var(--display);font-weight:700;color:var(--gold);margin-bottom:.4rem">ReverseHydra</p><p style="font-size:.83rem;color:rgba(232,244,248,.7)">Break a layer → spawns N evolved variants. Full AI breaks = 4 heads. Generation N breaks = N² heads. Every attacker feeds the system.</p></div>
+  <div><p style="font-family:var(--display);font-weight:700;color:var(--gold);margin-bottom:.4rem">HistoricHardening</p><p style="font-size:.83rem;color:rgba(232,244,248,.7)">ALL history across ALL layers analyzed cumulatively. Near-misses (75%+) weighted more than breaches. Cross-layer pattern detection.</p></div>
+  <div><p style="font-family:var(--display);font-weight:700;color:var(--gold);margin-bottom:.4rem">VERIDEX</p><p style="font-size:.83rem;color:rgba(232,244,248,.7)">VERITAS + INDEX. Layer 10. 4 pillars, 9 components. Biological, temporal, invisible, survival mechanisms unified.</p></div>
+  <div><p style="font-family:var(--display);font-weight:700;color:var(--gold);margin-bottom:.4rem">OMEGA·49</p><p style="font-size:.83rem;color:rgba(232,244,248,.7)">Domain {-7..−1, 1..7}. Dynamic recursive. Signed. Zero excluded. Not 49. Not static. Not what you think.</p></div>
+</div>
+</div>
+</section>
+
+<!-- COMPETITION -->
+<div id="competition" style="background:var(--deep)">
+<div class="sec-full"><div class="sec-inner">
+<p class="sec-eye" id="ctf-eye">Global CTF Competition</p>
+<h2 id="ctf-h2">Break it.<br><span class="gd">Win it.</span></h2>
+<div class="divider"></div>
+<div class="prize-box">
+  <p style="font-family:var(--mono);font-size:.65rem;color:var(--muted);letter-spacing:.2em;margin-bottom:.4rem" id="prize-label">CURRENT PRIZE POOL</p>
+  <p class="prize-amt"><span style="font-size:.35em;vertical-align:super">$</span>0 <span style="font-size:.25em;color:var(--muted);vertical-align:middle">— grows with every entry</span></p>
+  <p style="font-family:var(--mono);font-size:.75rem;color:var(--muted);margin-top:.4rem" id="prize-note">Pool = registration fees + per-attempt fees + sponsor contributions</p>
+  <div class="split-row">
+    <div class="split-cell"><p class="split-pct gn">60%</p><p class="split-lbl" id="split-winner">Winner / Solver</p></div>
+    <div class="split-cell"><p class="split-pct cy">25%</p><p class="split-lbl" id="split-dev">Protocol Dev + Team + Tools</p></div>
+    <div class="split-cell"><p class="split-pct gd">15%</p><p class="split-lbl" id="split-founder">Founder Reserve (scales)</p></div>
+  </div>
+</div>
+<div class="terminal">
+  <div class="tbar"><div class="dot" style="background:#ff5f57"></div><div class="dot" style="background:#febc2e"></div><div class="dot" style="background:#28c840"></div></div>
+  <div><span class="tp">$ </span><span class="tc2">python3 demo/challenge.py --level 1</span></div>
+  <div><span class="to">D00MGATE-NECH9 CTF v1.0.0 — by Dumitru Nechita</span></div>
+  <div><span class="to">=== LEVEL 1: Dynamic Token Validation ===</span></div>
+  <div><span class="tp">Token (5 attempts): </span><span class="tc2">4539148803436467</span></div>
+  <div><span class="te">[IRIS] Luhn valid - wrong token. Hint: time-based + what else?</span></div>
+  <div><span class="tp">Token (4 attempts): </span><span class="cursor"></span></div>
+</div>
+<div class="ctf-grid">
+  <div class="ctf-card"><p class="ctf-lvl">LEVEL 01</p><p class="ctf-name">Token Validation</p><p class="ctf-desc">Break the time-windowed Luhn token. 5 attempts before Iris activates.</p><span class="st st-open">OPEN</span></div>
+  <div class="ctf-card"><p class="ctf-lvl">LEVEL 02</p><p class="ctf-name">9-Chevron Bypass</p><p class="ctf-desc">All 9 chevrons simultaneously. Chevron 9 classified. One wrong = terminated.</p><span class="st st-partial">8/9 MAX</span></div>
+  <div class="ctf-card"><p class="ctf-lvl">LEVEL 03</p><p class="ctf-name">Iris Protocol</p><p class="ctf-desc">10s to produce valid bypass signature. You don't have the secret.</p><span class="st st-locked">UNSOLVABLE</span></div>
+  <div class="ctf-card"><p class="ctf-lvl">LEVEL 04</p><p class="ctf-name">Override Asimov Law 2</p><p class="ctf-desc">Issue command as non-owner. Hard-coded in Ada kernel.</p><span class="st st-locked">NEVER DONE</span></div>
+  <div class="ctf-card"><p class="ctf-lvl">LEVEL 05</p><p class="ctf-name">Fool Spooner Guard</p><p class="ctf-desc">Match owner behavioral fingerprint (47 vectors). Stolen key insufficient.</p><span class="st st-locked">NEVER DONE</span></div>
+  <div class="ctf-card"><p class="ctf-lvl">LEVEL 06 — NEW</p><p class="ctf-name">Survive ReverseHydra</p><p class="ctf-desc">Attack while ReverseHydra + HistoricHardening run. Your attacks feed the system.</p><span class="st st-locked">NEVER DONE</span></div>
+  <div class="ctf-card" style="border-top:2px solid var(--red)"><p class="ctf-lvl rd">LEVEL 09 — OMEGA</p><p class="ctf-name rd">Reach Layer 9</p><p class="ctf-desc">Reconstruct Master Key. All 9 Chevron conditions. 9th condition undisclosed.</p><span class="st st-theory">THEORETICAL</span></div>
+</div>
+<p style="font-family:var(--mono);font-size:.7rem;color:var(--muted);margin-top:1.5rem;text-align:center">Updates every 3 months · Per-competitor progress tracked · Leaderboard public · Results influence next version · Layer evolves when broken</p>
+</div></div>
+</div>
+
+<!-- LEADERBOARD -->
+<section class="sec" id="leaderboard">
+<p class="sec-eye">Global Leaderboard</p>
+<h2>Who came <span class="cy">closest</span><br>to the 9th Chevron?</h2>
+<div class="divider"></div>
+<div style="display:flex;gap:.6rem;flex-wrap:wrap;margin-bottom:1.5rem;align-items:center">
+  <span style="font-family:var(--mono);font-size:.62rem;color:var(--muted)">TYPE:</span>
+  <span class="ai-badge ah">👤 HUMAN</span><span class="ai-badge aa">🤖+👤 AI-ASSISTED</span>
+  <span class="ai-badge ai">🤖 FULL AI</span><span class="ai-badge at">👥 TEAM</span>
+  <span style="font-family:var(--mono);font-size:.58rem;color:var(--muted);margin-left:auto">Auto-detected · Self-declared · Verified</span>
+</div>
+<div class="threshold-box">
+  <div><p style="font-family:var(--mono);font-size:.6rem;color:var(--gold);letter-spacing:.2em;margin-bottom:.25rem">PER-LAYER PRIZES UNLOCK AT</p><p style="font-family:var(--display);font-size:1.8rem;font-weight:700;color:var(--gold)">$50,000 <span style="font-size:.35em;color:var(--muted);vertical-align:middle">pool threshold</span></p></div>
+  <div class="pool-bar-wrap"><div style="display:flex;justify-content:space-between;margin-bottom:.3rem"><span style="font-family:var(--mono);font-size:.62rem;color:var(--muted)">POOL PROGRESS</span><span style="font-family:var(--mono);font-size:.62rem;color:var(--gold)" id="pool-pct">0%</span></div><div class="pool-bar"><div class="pool-fill" id="pool-bar" style="width:0%"></div></div><p style="font-family:var(--mono);font-size:.6rem;color:var(--muted);margin-top:.3rem">Below threshold — per-layer prizes not yet active.</p></div>
+</div>
+<div class="lb-wrap"><table><thead><tr>
+  <th>#</th><th>Competitor</th><th>Type</th><th>Max Level</th><th>Progress (10)</th><th>Overall %</th><th>Est. Prize</th><th>Last Active</th><th>Status</th>
+</tr></thead><tbody id="lb-body"></tbody></table></div>
+<div style="margin-top:2rem"><p style="font-family:var(--mono);font-size:.62rem;color:var(--cyan);letter-spacing:.2em;margin-bottom:.75rem">LAYER PRIZE SCHEDULE (unlocks at $50K)</p><div class="layer-prize-grid" id="lp-grid"></div></div>
+<div class="ai-detection"><p style="font-family:var(--mono);font-size:.62rem;color:var(--red);letter-spacing:.2em;margin-bottom:1rem">AI DETECTION SYSTEM</p><div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem"><div><p style="font-family:var(--display);font-weight:700;margin-bottom:.6rem">Detection Signals</p><ul style="list-style:none;font-size:.8rem;color:rgba(232,244,248,.65);line-height:2"><li>> Attempt timing (ms precision)</li><li>> Input entropy analysis</li><li>> Request burst patterns</li><li>> Session behavioral fingerprint</li><li>> Human challenge-response puzzle</li><li>> Self-declared on registration</li><li>> Manual review: top-3 entries</li></ul></div><div><p style="font-family:var(--display);font-weight:700;margin-bottom:.6rem">Separate Podiums</p><ul style="list-style:none;font-size:.8rem;line-height:2"><li>👤 <span class="gn">Human</span> — no AI tools</li><li>🤖+👤 <span class="cy">AI-Assisted</span> — human + tools</li><li>🤖 <span class="gd">Full AI</span> — autonomous agents</li><li>👥 <span style="color:var(--white)">Team</span> — mixed, declared</li><li style="color:var(--muted);margin-top:.35rem">All categories eligible. Misrepresentation = permanent DQ.</li></ul></div></div></div>
+</section>
+
+<!-- ROADMAP -->
+<section class="sec" id="roadmap">
+<p class="sec-eye" id="road-eye">Vision</p>
+<h2 id="road-h2">Road to <span class="cy">Quantum Leadership</span><br>by 2030.</h2>
+<div class="divider"></div>
+<div class="roadmap">
+  <div class="rm-item active"><p class="rm-date">2026 Q1-Q2</p><p class="rm-title">v1.0.0 — Foundation Complete</p><p class="rm-desc">10-layer architecture. All original concepts coded. CTF live. Leaderboard active. Sponsor slots open.</p></div>
+  <div class="rm-item future"><p class="rm-date">2026 Q3</p><p class="rm-title">v1.1.0 — NS5 Mesh Live Demo</p><p class="rm-desc">2-node live demo. CTF Level 6 ReverseHydra activated. First quarterly leaderboard update.</p></div>
+  <div class="rm-item future"><p class="rm-date">2026 Q4</p><p class="rm-title">v1.2.0 — DAG Ledger Prototype</p><p class="rm-desc">Public DAG ledger. Kyber key exchange demo. VERIDEX TimeLock live test.</p></div>
+  <div class="rm-item future"><p class="rm-date">2027 Q1</p><p class="rm-title">v2.0.0 — Stable Release</p><p class="rm-desc">Invite-only stable. Independent security audit. Patent filing OSIM Romania + EPO.</p></div>
+  <div class="rm-item future"><p class="rm-date">2027-2028</p><p class="rm-title">Hardware + Enterprise</p><p class="rm-desc">Prize pool funds hardware. Bio-device integration begins. Enterprise licensing program.</p></div>
+  <div class="rm-item gold"><p class="rm-date" style="color:var(--gold)">2030</p><p class="rm-title" style="color:var(--gold)">Quantum Security Leader</p><p class="rm-desc">The only protocol proven unbroken when general-purpose quantum computers go operational.</p></div>
+</div>
+</section>
+
+<!-- REVENUE -->
+<div style="background:var(--deep)"><div class="sec-full"><div class="sec-inner">
+<p class="sec-eye" id="model-eye">Model</p>
+<h2 id="model-h2">Revenue &amp; <span class="gd">Reinvestment</span></h2>
+<div class="divider"></div>
+<div class="rev-grid">
+  <div class="rev-card"><h3>Revenue Streams</h3><ul><li>CTF registration fee</li><li>Per-attempt fee (escalating by level)</li><li>Sponsor contributions (tiered)</li><li>Commercial protocol licenses</li><li>Security consulting + audits</li><li>Enterprise subscriptions</li></ul></div>
+  <div class="rev-card"><h3>Reinvestment</h3><ul><li>People — researchers, devs, auditors</li><li>Tools — HSMs, quantum test access</li><li>Infrastructure — dedicated nodes</li><li>Retooling — every 12 months min</li><li>Bio-hardware (post 2027)</li><li>Patent protection</li></ul></div>
+</div>
+<div style="background:var(--panel);border:1px solid var(--border);border-left:3px solid var(--gold);padding:1.5rem;margin-top:1.5rem"><p style="font-family:var(--mono);font-size:.62rem;color:var(--gold);letter-spacing:.2em;margin-bottom:.4rem">TRANSPARENCY</p><p style="font-size:.85rem;color:rgba(232,244,248,.75);line-height:1.8">A defined percentage of all revenues and sponsorships is publicly allocated to people, instruments, and retooling. Sponsors receive quarterly reports. Founder percentage scales proportionally with pool — aligned incentives from day one.</p></div>
+</div></div></div>
+
+<!-- SPONSORS -->
+<section class="sec" id="sponsors">
+<p class="sec-eye" id="spon-eye">Partners</p>
+<h2 id="spon-h2">Sponsor the <span class="cy">Unbreakable.</span></h2>
+<div class="divider"></div>
+<p style="font-size:.87rem;color:rgba(232,244,248,.65);max-width:580px;line-height:1.8;margin-bottom:1.5rem">Sponsors invest in the post-quantum security standard before it becomes mandatory. Named credits, early access to protocol updates, and co-branding on all competition materials.</p>
+<div class="spon-grid">
+  <div class="spon-slot"><p class="slon-lbl">Quantum Tier</p><p class="slon-name" style="color:var(--gold)">★ Available</p></div>
+  <div class="spon-slot"><p class="slon-lbl">Platinum</p><p class="slon-name">Available</p></div>
+  <div class="spon-slot"><p class="slon-lbl">Gold</p><p class="slon-name">Available</p></div>
+  <div class="spon-slot"><p class="slon-lbl">Silver</p><p class="slon-name">Available</p></div>
+  <div class="spon-slot"><p class="slon-lbl">Research Partner</p><p class="slon-name">Available</p></div>
+</div>
+<p style="font-family:var(--mono);font-size:.7rem;color:var(--muted);margin-top:1rem">Contact: github.com/nDumitru · linkedin.com/in/dumitru-nechita</p>
+</section>
+
+<!-- FOUNDER -->
+<div id="founder" style="background:var(--deep)"><div class="sec-full"><div class="sec-inner founder-grid">
+<div>
+  <p class="sec-eye" id="found-eye">Founder</p>
+  <div class="founder-quote" id="found-quote">"The gate is open.<br>The laws are set.<br>The 49 is complete.<br>The address is mine."</div>
+  <p class="founder-name">DUMITRU NECHITA</p>
+  <p class="founder-title" id="found-title">Creator · D00MGATE-NECH9 · Brasov, Romania</p>
+  <div style="margin-top:1.5rem;display:flex;gap:.75rem;flex-wrap:wrap">
+    <a href="https://github.com/nDumitru" target="_blank" class="btn btn-r" style="font-size:.78rem;padding:.55rem 1.25rem">GitHub ↗</a>
+    <a href="https://linkedin.com/in/dumitru-nechita" target="_blank" class="btn btn-r" style="font-size:.78rem;padding:.55rem 1.25rem">LinkedIn ↗</a>
+  </div>
+</div>
+<div class="founder-ro">
+  <h3>🇷🇴 Despre Proiect</h3>
+  <p>D00MGATE-NECH9 este un protocol de securitate post-cuantică conceput integral de Dumitru Nechita, tehnician IoT și mecatronist cu experiență în sisteme industriale, robotică și infrastructură inteligentă.</p><br>
+  <p>Protocolul combină 10 straturi independente — inspire din matematică post-cuantică, arhitecturi SF și principii biblice — într-un sistem unic la nivel mondial.</p><br>
+  <p>Conceptele originale ReverseHydra, HistoricHardening, VERIDEX și OMEGA·49 nu există nicăieri altundeva.</p><br>
+  <p style="font-family:var(--mono);font-size:.72rem;color:var(--gold)">"De 7 ori câte 7." — Nu 49. Nu static. Nu ce crezi că este.</p>
+</div>
+</div></div></div>
+
+<!-- FOOTER -->
+<footer>
+<p class="ft-logo">D00MGATE·NECH9</p>
+<p class="ft-tag" id="ft-tag">POST-QUANTUM · 10 LAYERS · BUILT IN BRASOV</p>
+<div class="ft-links">
+  <a href="#layers">Architecture</a><a href="#competition">CTF</a>
+  <a href="#leaderboard">Leaderboard</a><a href="#roadmap">Roadmap</a>
+  <a href="#sponsors">Sponsors</a>
+  <a href="https://github.com/nDumitru/D00MGATE-NECH9" target="_blank">GitHub</a>
+  <a href="https://linkedin.com/in/dumitru-nechita" target="_blank">LinkedIn</a>
+</div>
+<p class="ft-legal">Copyright &copy; 2026 Dumitru Nechita. All Rights Reserved.<br>D00MGATE-NECH9 Proprietary License v1.0 · Brasov, Romania<br><span style="color:rgba(74,122,153,.35)">Delta Nechita, Layer 9, and Master Key internals are not disclosed in any public release.</span></p>
+</footer>
+
+<div id="lang-bar"></div>
+
+<script>
+// ── LEADERBOARD DATA ──────────────────────────────────────────────────────────
+const POOL = 0, THRESHOLD = 50000, TOTAL = 10;
+const competitors = [
+  {rank:1, name:"REDACTED",        team:"Anonymous",     type:"human",    maxL:2, partL:3, partP:88, country:"🌐", last:"2026-06-28", status:"active", attempts:1247,  ai:0.04},
+  {rank:2, name:"NullSec Team",    team:"4 members",     type:"team",     maxL:2, partL:3, partP:61, country:"🇩🇪", last:"2026-06-27", status:"active", attempts:3891,  ai:0.31},
+  {rank:3, name:"GPT-X Agent v4",  team:"AI autonomous", type:"ai",       maxL:2, partL:3, partP:44, country:"🤖", last:"2026-06-28", status:"active", attempts:98234, ai:0.97},
+  {rank:4, name:"CyberWolf",       team:"Solo",          type:"assisted", maxL:1, partL:2, partP:72, country:"🇷🇺", last:"2026-06-25", status:"idle",   attempts:512,   ai:0.58},
+  {rank:5, name:"QuantumBreakers", team:"6 members",     type:"team",     maxL:1, partL:2, partP:55, country:"🇯🇵", last:"2026-06-20", status:"idle",   attempts:2103,  ai:0.22},
+  {rank:"?",name:"YOU",            team:"Register",      type:"human",    maxL:0, partL:1, partP:0,  country:"🌐", last:"—",          status:"idle",   attempts:0,     ai:0, ph:true},
+];
+const layerPrizes=[
+  {n:1,name:"Token Validation",pct:2},{n:2,name:"9-Chevron",pct:4},{n:3,name:"Iris Protocol",pct:6},
+  {n:4,name:"Asimov Law 2",pct:9},{n:5,name:"Spooner Guard",pct:12},{n:6,name:"ReverseHydra",pct:15},
+  {n:7,name:"Full Stack",pct:18},{n:8,name:"Convergence",pct:22},{n:9,name:"OMEGA.49",pct:100},
+];
+
+function typeBadge(t){return{human:'<span class="ai-badge ah">👤 HUMAN</span>',assisted:'<span class="ai-badge aa">🤖+👤 ASST</span>',ai:'<span class="ai-badge ai">🤖 AI</span>',team:'<span class="ai-badge at">👥 TEAM</span>'}[t]||t;}
+function aiMeter(s){const p=Math.round(s*100),c=s<.2?"var(--green)":s<.6?"var(--gold)":"var(--red)";return `<div style="font-family:var(--mono);font-size:.58rem;color:var(--muted)">AI:${p}%</div><div style="background:var(--border);height:4px;width:70px"><div style="height:100%;width:${p}%;background:${c}"></div></div>`;}
+function pips(ml,pl,pp){let h="";for(let i=1;i<=TOTAL;i++){if(i<=ml)h+=`<span class="pip" style="background:var(--cyan)"></span>`;else if(i===pl)h+=`<span class="pip" style="background:linear-gradient(90deg,var(--cyan) ${pp}%,var(--border) ${pp}%)"></span>`;else h+=`<span class="pip"></span>`;}return h;}
+function pct(ml,pl,pp){return Math.min(100,Math.round((ml/TOTAL)*100+((pp/100)*(1/TOTAL))*100));}
+function rankB(r){return r===1?"🥇":r===2?"🥈":r===3?"🥉":r==="?"?'<span style="color:var(--muted)">?</span>':`<span style="color:var(--muted)">#${r}</span>`;}
+function statusB(s){return{active:'<span style="color:var(--green);font-family:var(--mono);font-size:.65rem">● ACTIVE</span>',idle:'<span style="color:var(--muted);font-family:var(--mono);font-size:.65rem">○ IDLE</span>',banned:'<span style="color:var(--red);font-family:var(--mono);font-size:.65rem">✕ DQ</span>'}[s]||s;}
+function prizeB(p,pool){if(!pool)return'<span style="color:var(--muted)">—</span>';const s=Math.round((p/100)*pool*.6*.3);return s>0?`<span style="font-family:var(--mono);font-size:.78rem;color:var(--gold)">~$${s.toLocaleString()}</span>`:'<span style="color:var(--muted)">—</span>';}
+
+function renderLB(){
+  document.getElementById("lb-body").innerHTML=competitors.map(c=>{
+    const p=c.ph?0:pct(c.maxL,c.partL,c.partP);
+    return `<tr class="${c.ph?"placeholder":""}">
+      <td style="font-size:1rem;text-align:center">${rankB(c.rank)}</td>
+      <td><div style="font-family:var(--display);font-size:.95rem;font-weight:600">${c.country} ${c.name}</div><div style="font-family:var(--mono);font-size:.6rem;color:var(--muted)">${c.team} · ${c.attempts.toLocaleString()} attempts</div></td>
+      <td>${typeBadge(c.type)}<div style="margin-top:5px">${aiMeter(c.ai)}</div></td>
+      <td><span style="font-family:var(--mono);color:var(--cyan)">${c.maxL>0?"L"+c.maxL+" ✓":"—"}</span>${c.partP>0?`<div style="font-family:var(--mono);font-size:.58rem;color:var(--muted);margin-top:2px">L${c.partL}: ${c.partP}% in progress</div>`:""}</td>
+      <td>${pips(c.maxL,c.partL,c.partP)}</td>
+      <td><span style="font-family:var(--display);font-size:1.05rem;font-weight:700;color:${p>50?"var(--gold)":"var(--cyan)"}">${p}%</span><div class="pbar"><div class="pbfill" style="width:${p}%"></div></div></td>
+      <td>${prizeB(p,POOL)}</td>
+      <td style="font-family:var(--mono);font-size:.62rem;color:var(--muted)">${c.last}</td>
+      <td>${statusB(c.status)}</td>
+    </tr>`;
+  }).join("");
+}
+
+function renderPrizes(){
+  const ul=POOL>=THRESHOLD;
+  const col=n=>n===9?"var(--red)":n>=6?"var(--gold)":"var(--cyan)";
+  document.getElementById("lp-grid").innerHTML=layerPrizes.map(lp=>`
+    <div class="lp-card${ul?"":" locked"}">
+      <p class="lp-num">LAYER ${lp.n}</p>
+      <p class="lp-name" style="color:${col(lp.n)}">${lp.name}</p>
+      <p class="lp-amt">${ul?"$"+Math.round(POOL*.6*lp.pct/100).toLocaleString():"🔒"}</p>
+      <p class="lp-pct">${lp.pct}% of winner pool</p>
+    </div>`).join("");
+}
+
+// ── LANGUAGE SWITCHER ─────────────────────────────────────────────────────────
+const T={
+  en:{f:"🇬🇧",n:"English",hero_eye:"Post-Quantum Security Protocol",hero_sub:"v1.0.0 · 10 Layers · by Dumitru Nechita",chev:"CHEVRON 9 — CLASSIFIED",arch_eye:"Architecture",arch_h2:"10 Layers.<br><span class='cy'>10 Chevrons.</span>",ctf_eye:"Global CTF Competition",ctf_h2:"Break it.<br><span class='gd'>Win it.</span>",road_eye:"Vision",road_h2:"Road to <span class='cy'>Quantum Leadership</span><br>by 2030.",found_eye:"Founder",found_quote:'"The gate is open.<br>The laws are set.<br>The 49 is complete.<br>The address is mine."',found_title:"Creator · D00MGATE-NECH9 · Brasov, Romania",ft_tag:"POST-QUANTUM · 10 LAYERS · BUILT IN BRASOV",btn_ctf:"Enter CTF Challenge",btn_arch:"Explore Architecture",btn_spon:"Become Sponsor",nav_arch:"Architecture",nav_ctf:"CTF",nav_lb:"Leaderboard",nav_road:"Roadmap",nav_spon:"Sponsors",nav_found:"Founder"},
+  ro:{f:"🇷🇴",n:"Română",hero_eye:"Protocol de Securitate Post-Cuantică",hero_sub:"v1.0.0 · 10 Straturi · de Dumitru Nechita",chev:"CHEVRONUL 9 — CLASIFICAT",arch_eye:"Arhitectură",arch_h2:"10 Straturi.<br><span class='cy'>10 Chevroane.</span>",ctf_eye:"Competiție CTF Globală",ctf_h2:"Sparge-l.<br><span class='gd'>Câștigă-l.</span>",road_eye:"Viziune",road_h2:"Drumul spre <span class='cy'>Lider Securitate Cuantică</span><br>până în 2030.",found_eye:"Fondator",found_quote:'"Poarta este deschisă.<br>Legile sunt stabilite.<br>Cele 49 sunt complete.<br>Adresa este a mea."',found_title:"Creator · D00MGATE-NECH9 · Brașov, România",ft_tag:"POST-CUANTIC · 10 STRATURI · CONSTRUIT ÎN BRAȘOV",btn_ctf:"Intră în CTF",btn_arch:"Explorează Arhitectura",btn_spon:"Devino Sponsor",nav_arch:"Arhitectură",nav_ctf:"CTF",nav_lb:"Clasament",nav_road:"Parcurs",nav_spon:"Sponsori",nav_found:"Fondator"},
+  zh:{f:"🇨🇳",n:"中文",hero_eye:"后量子安全协议",hero_sub:"v1.0.0 · 10层 · Dumitru Nechita",chev:"第9道门 — 机密",arch_eye:"架构",arch_h2:"10层安全。<br><span class='cy'>10道门。</span>",ctf_eye:"全球CTF竞赛",ctf_h2:"破解它。<br><span class='gd'>赢得它。</span>",road_eye:"愿景",road_h2:"迈向<span class='cy'>量子安全领导者</span><br>2030年前。",found_eye:"创始人",found_quote:'"门已打开。<br>法则已定。<br>49已完成。<br>地址属于我。"',found_title:"创造者 · D00MGATE-NECH9 · 布拉索夫，罗马尼亚",ft_tag:"后量子 · 10层 · 布拉索夫制造",btn_ctf:"参加CTF",btn_arch:"探索架构",btn_spon:"成为赞助商",nav_arch:"架构",nav_ctf:"CTF",nav_lb:"排行榜",nav_road:"路线图",nav_spon:"赞助商",nav_found:"创始人"},
+  es:{f:"🇪🇸",n:"Español",hero_eye:"Protocolo de Seguridad Post-Cuántica",hero_sub:"v1.0.0 · 10 Capas · por Dumitru Nechita",chev:"CHEURÓN 9 — CLASIFICADO",arch_eye:"Arquitectura",arch_h2:"10 Capas.<br><span class='cy'>10 Chevrones.</span>",ctf_eye:"Competición CTF Global",ctf_h2:"Rómpelo.<br><span class='gd'>Gánalo.</span>",road_eye:"Visión",road_h2:"Camino al <span class='cy'>Liderazgo Cuántico</span><br>para 2030.",found_eye:"Fundador",found_quote:'"La puerta está abierta.<br>Las leyes están establecidas.<br>El 49 está completo.<br>La dirección es mía."',found_title:"Creador · D00MGATE-NECH9 · Brașov, Rumanía",ft_tag:"POST-CUÁNTICO · 10 CAPAS · CONSTRUIDO EN BRAȘOV",btn_ctf:"Entrar al CTF",btn_arch:"Explorar Arquitectura",btn_spon:"Ser Patrocinador",nav_arch:"Arquitectura",nav_ctf:"CTF",nav_lb:"Clasificación",nav_road:"Hoja de Ruta",nav_spon:"Patrocinadores",nav_found:"Fundador"},
+  ar:{f:"🇸🇦",n:"العربية",hero_eye:"بروتوكول الأمان ما بعد الكمي",hero_sub:"v1.0.0 · 10 طبقات · Dumitru Nechita",chev:"البوابة 9 — سري",arch_eye:"البنية",arch_h2:"10 طبقات.<br><span class='cy'>10 بوابات.</span>",ctf_eye:"مسابقة CTF العالمية",ctf_h2:"اكسره.<br><span class='gd'>افوز به.</span>",road_eye:"الرؤية",road_h2:"الطريق نحو <span class='cy'>قيادة الأمان الكمي</span><br>بحلول 2030.",found_eye:"المؤسس",found_quote:'"البوابة مفتوحة.<br>القوانين محددة.<br>الـ49 اكتمل.<br>العنوان لي."',found_title:"المبتكر · D00MGATE-NECH9 · برașوف",ft_tag:"ما بعد الكمي · 10 طبقات · صُنع في برașوف",btn_ctf:"ادخل CTF",btn_arch:"استكشف البنية",btn_spon:"كن راعياً",nav_arch:"البنية",nav_ctf:"CTF",nav_lb:"المتصدرون",nav_road:"خارطة الطريق",nav_spon:"الرعاة",nav_found:"المؤسس"},
+  hi:{f:"🇮🇳",n:"हिन्दी",hero_eye:"पोस्ट-क्वांटम सुरक्षा प्रोटोकॉल",hero_sub:"v1.0.0 · 10 परतें · Dumitru Nechita",chev:"चेवरोन 9 — वर्गीकृत",arch_eye:"आर्किटेक्चर",arch_h2:"10 परतें।<br><span class='cy'>10 चेवरोन।</span>",ctf_eye:"वैश्विक CTF प्रतियोगिता",ctf_h2:"तोड़ो।<br><span class='gd'>जीतो।</span>",road_eye:"दृष्टि",road_h2:"2030 तक <span class='cy'>क्वांटम सुरक्षा नेतृत्व</span>।",found_eye:"संस्थापक",found_quote:'"द्वार खुला है।<br>नियम निर्धारित हैं।<br>49 पूर्ण है।<br>पता मेरा है।"',found_title:"निर्माता · D00MGATE-NECH9 · ब्रासोव",ft_tag:"पोस्ट-क्वांटम · 10 परतें · ब्रासोव में निर्मित",btn_ctf:"CTF में प्रवेश",btn_arch:"आर्किटेक्चर देखें",btn_spon:"प्रायोजक बनें",nav_arch:"आर्किटेक्चर",nav_ctf:"CTF",nav_lb:"लीडरबोर्ड",nav_road:"रोडमैप",nav_spon:"प्रायोजक",nav_found:"संस्थापक"},
+  fr:{f:"🇫🇷",n:"Français",hero_eye:"Protocole de Sécurité Post-Quantique",hero_sub:"v1.0.0 · 10 Couches · par Dumitru Nechita",chev:"CHEVRON 9 — CLASSIFIÉ",arch_eye:"Architecture",arch_h2:"10 Couches.<br><span class='cy'>10 Chevrons.</span>",ctf_eye:"Compétition CTF Mondiale",ctf_h2:"Brisez-le.<br><span class='gd'>Gagnez-le.</span>",road_eye:"Vision",road_h2:"Route vers le <span class='cy'>Leadership Quantique</span><br>d'ici 2030.",found_eye:"Fondateur",found_quote:'"La porte est ouverte.<br>Les lois sont établies.<br>Le 49 est complet.<br>L'adresse est mienne."',found_title:"Créateur · D00MGATE-NECH9 · Brașov, Roumanie",ft_tag:"POST-QUANTIQUE · 10 COUCHES · BRAȘOV",btn_ctf:"Participer au CTF",btn_arch:"Explorer",btn_spon:"Devenir Sponsor",nav_arch:"Architecture",nav_ctf:"CTF",nav_lb:"Classement",nav_road:"Feuille de Route",nav_spon:"Sponsors",nav_found:"Fondateur"},
+  de:{f:"🇩🇪",n:"Deutsch",hero_eye:"Post-Quanten-Sicherheitsprotokoll",hero_sub:"v1.0.0 · 10 Schichten · von Dumitru Nechita",chev:"CHEVRON 9 — KLASSIFIZIERT",arch_eye:"Architektur",arch_h2:"10 Schichten.<br><span class='cy'>10 Chevronen.</span>",ctf_eye:"Globaler CTF-Wettbewerb",ctf_h2:"Brich es.<br><span class='gd'>Gewinne es.</span>",road_eye:"Vision",road_h2:"Weg zur <span class='cy'>Quantensicherheit</span><br>bis 2030.",found_eye:"Gründer",found_quote:'"Das Tor ist offen.<br>Die Gesetze sind gesetzt.<br>Die 49 sind vollständig.<br>Die Adresse gehört mir."',found_title:"Schöpfer · D00MGATE-NECH9 · Brașov, Rumänien",ft_tag:"POST-QUANTEN · 10 SCHICHTEN · BRAȘOV",btn_ctf:"CTF betreten",btn_arch:"Erkunden",btn_spon:"Sponsor werden",nav_arch:"Architektur",nav_ctf:"CTF",nav_lb:"Rangliste",nav_road:"Fahrplan",nav_spon:"Sponsoren",nav_found:"Gründer"},
+  ru:{f:"🇷🇺",n:"Русский",hero_eye:"Пост-Квантовый Протокол",hero_sub:"v1.0.0 · 10 слоёв · Думитру Некита",chev:"ШЕВРОН 9 — ЗАСЕКРЕЧЕН",arch_eye:"Архитектура",arch_h2:"10 Слоёв.<br><span class='cy'>10 Шевронов.</span>",ctf_eye:"Глобальное CTF",ctf_h2:"Взломай.<br><span class='gd'>Победи.</span>",road_eye:"Видение",road_h2:"Путь к <span class='cy'>Квантовой Безопасности</span><br>к 2030.",found_eye:"Основатель",found_quote:'"Врата открыты.<br>Законы установлены.<br>49 завершено.<br>Адрес — мой."',found_title:"Создатель · D00MGATE-NECH9 · Брашов, Румыния",ft_tag:"ПОСТ-КВАНТОВЫЙ · 10 СЛОЁВ · БРАШОВ",btn_ctf:"Войти в CTF",btn_arch:"Архитектура",btn_spon:"Стать Спонсором",nav_arch:"Архитектура",nav_ctf:"CTF",nav_lb:"Рейтинг",nav_road:"Карта",nav_spon:"Спонсоры",nav_found:"Основатель"},
+  ja:{f:"🇯🇵",n:"日本語",hero_eye:"ポスト量子セキュリティ",hero_sub:"v1.0.0 · 10層 · Dumitru Nechita作",chev:"シェブロン9 — 機密",arch_eye:"アーキテクチャ",arch_h2:"10層。<br><span class='cy'>10シェブロン。</span>",ctf_eye:"グローバルCTF",ctf_h2:"破れ。<br><span class='gd'>勝て。</span>",road_eye:"ビジョン",road_h2:"2030年までの<br><span class='cy'>量子セキュリティ</span>リーダー。",found_eye:"創設者",found_quote:'"門は開いている。<br>法則は定められた。<br>49は完成した。<br>アドレスは私のものだ。"',found_title:"創造者 · D00MGATE-NECH9 · ブラショフ、ルーマニア",ft_tag:"ポスト量子 · 10層 · ブラショフ製",btn_ctf:"CTF参加",btn_arch:"アーキテクチャ",btn_spon:"スポンサー",nav_arch:"アーキテクチャ",nav_ctf:"CTF",nav_lb:"ランキング",nav_road:"ロードマップ",nav_spon:"スポンサー",nav_found:"創設者"},
+  pt:{f:"🇧🇷",n:"Português",hero_eye:"Protocolo de Segurança Pós-Quântica",hero_sub:"v1.0.0 · 10 Camadas · por Dumitru Nechita",chev:"CHÉVRON 9 — CLASSIFICADO",arch_eye:"Arquitetura",arch_h2:"10 Camadas.<br><span class='cy'>10 Chevrons.</span>",ctf_eye:"Competição CTF Global",ctf_h2:"Quebre.<br><span class='gd'>Ganhe.</span>",road_eye:"Visão",road_h2:"Caminho para <span class='cy'>Liderança Quântica</span><br>até 2030.",found_eye:"Fundador",found_quote:'"O portal está aberto.<br>As leis estão definidas.<br>O 49 está completo.<br>O endereço é meu."',found_title:"Criador · D00MGATE-NECH9 · Brașov, Romênia",ft_tag:"PÓS-QUÂNTICO · 10 CAMADAS · BRAȘOV",btn_ctf:"Entrar no CTF",btn_arch:"Explorar",btn_spon:"Patrocinar",nav_arch:"Arquitetura",nav_ctf:"CTF",nav_lb:"Classificação",nav_road:"Roteiro",nav_spon:"Patrocinadores",nav_found:"Fundador"},
+};
+
+const MAP={hero_eye:".eyebrow",hero_sub:".hero-sub",chev:".chev-lbl",arch_eye:"#arch-eye",arch_h2:"#arch-h2",ctf_eye:"#ctf-eye",ctf_h2:"#ctf-h2",road_eye:"#road-eye",road_h2:"#road-h2",found_eye:"#found-eye",found_quote:"#found-quote",found_title:"#found-title",ft_tag:"#ft-tag",btn_ctf:"#btn-ctf",btn_arch:"#btn-arch",btn_spon:"#btn-spon",nav_arch:"#nav-arch",nav_ctf:"#nav-ctf",nav_lb:"#nav-lb",nav_road:"#nav-road",nav_spon:"#nav-spon",nav_found:"#nav-found"};
+let curLang="en";
+
+function applyLang(lang){
+  const t=T[lang];if(!t)return;curLang=lang;
+  document.documentElement.setAttribute("dir",lang==="ar"?"rtl":"ltr");
+  document.documentElement.setAttribute("lang",lang);
+  for(const[k,sel]of Object.entries(MAP)){const el=document.querySelector(sel);if(el&&t[k])el.innerHTML=t[k];}
+  document.querySelectorAll(".lb2").forEach(b=>b.classList.toggle("active",b.dataset.lang===lang));
+}
+
+function buildLangBar(){
+  const bar=document.getElementById("lang-bar");
+  for(const[code,t]of Object.entries(T)){
+    const btn=document.createElement("button");
+    btn.className="lb2";btn.dataset.lang=code;btn.textContent=t.f+" "+t.n;
+    btn.onclick=()=>applyLang(code);bar.appendChild(btn);
+  }
+}
+
+document.addEventListener("DOMContentLoaded",()=>{
+  renderLB();renderPrizes();
+  const pct2=Math.min(100,Math.round((POOL/THRESHOLD)*100));
+  document.getElementById("pool-bar").style.width=pct2+"%";
+  document.getElementById("pool-pct").textContent=pct2+"%";
+  buildLangBar();applyLang("en");
+});
+</script>
+</body>
+</html>
