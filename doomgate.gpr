@@ -1,0 +1,32 @@
+-- =============================================================
+-- D00MGATE-NECH9 -- GNAT Project File
+-- Author: Dumitru Nechita
+-- Compile: gnatmake -P doomgate.gpr
+-- Run:     ./build/doomgate_demo
+-- =============================================================
+
+project Doomgate is
+
+   for Source_Dirs use ("core", "src", "demo");
+   for Object_Dir  use "build/obj";
+   for Exec_Dir    use "build";
+   for Main        use ("doomgate_demo.adb");
+
+   package Compiler is
+      for Default_Switches ("Ada") use
+         ("-O2",           -- Optimize
+          "-gnat2012",     -- Ada 2012 standard
+          "-Wall",         -- All warnings
+          "-gnata",        -- Enable assertions
+          "-gnatwl");      -- Elaboration warnings
+   end Compiler;
+
+   package Linker is
+      for Default_Switches ("Ada") use ("-lm");
+   end Linker;
+
+   package Binder is
+      for Default_Switches ("Ada") use ("-E");  -- Stack traceback
+   end Binder;
+
+end Doomgate;
