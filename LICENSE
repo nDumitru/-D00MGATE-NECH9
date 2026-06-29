@@ -1,0 +1,36 @@
+D00MGATE-NECH9 PROPRIETARY LICENSE v1.0
+Copyright (c) 2026 Dumitru Nechita. All Rights Reserved.
+
+SECTION 1 - OWNERSHIP
+D00MGATE-NECH9 protocol, VERIDEX, ReverseHydra, HistoricHardening, OMEGA.49,
+and all associated concepts, names, and materials are the exclusive intellectual
+property of Dumitru Nechita, Brasov, Romania.
+
+SECTION 2 - PERMITTED USE
+(a) Study and analyze public demonstration code for personal education.
+(b) Participate in official CTF challenges published in this repository.
+(c) Cite this work in academic research with full attribution to Dumitru Nechita.
+(d) Share links to this repository publicly.
+
+SECTION 3 - PROHIBITED USE
+(a) Commercial use without written license agreement signed by Dumitru Nechita.
+(b) Reverse engineering of any component, redacted or otherwise.
+(c) Derivative works based on this architecture, concepts, or naming.
+(d) Sublicensing, selling, or redistribution of any portion.
+(e) Removal of copyright notices or attribution statements.
+(f) Use of names D00MGATE, NECH9, VERIDEX, OMEGA.49, ReverseHydra,
+    HistoricHardening, Delta Nechita, or confusingly similar names.
+(g) Training AI or ML models on proprietary concepts without written permission.
+
+SECTION 4 - COMMERCIAL LICENSING
+Contact: github.com/nDumitru | linkedin.com/in/dumitru-nechita
+Minimum royalty: 15% perpetual on all commercial use.
+
+SECTION 5 - NO WARRANTY
+THE WORK IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND.
+
+SECTION 6 - GOVERNING LAW
+Laws of Romania. Jurisdiction: Brasov County Court.
+
+Dumitru Nechita | Brasov, Romania | 2026
+"The gate is open. The address is mine."

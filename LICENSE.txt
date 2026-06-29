@@ -1,0 +1,112 @@
+D00MGATE-NECH9 PROPRIETARY LICENSE
+Version 1.0 — Effective from first public commit
+
+Copyright (c) 2026 Dumitru Nechita. All Rights Reserved.
+
+This license governs the use of the D00MGATE-NECH9 protocol,
+its architecture, concepts, naming, and all associated materials
+published in this repository ("the Work").
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+SECTION 1 — OWNERSHIP
+
+The Work, including but not limited to:
+  - The D00MGATE-NECH9 protocol architecture
+  - The Four Races Security Model
+  - The 9-Chevron Authentication System
+  - The Iris Defense Protocol concept
+  - The Dynamic Luhn Token System (combination mechanics)
+  - The Self-Mutation Engine concept
+  - The Heir Protocol design
+  - The "Delta Nechita" parameter concept
+  - All naming, branding, and identifiers
+
+...is the exclusive intellectual property of Dumitru Nechita.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+SECTION 2 — PERMITTED USE
+
+You ARE permitted to:
+
+  a) Read, study, and analyze the public demonstration code
+     contained in the /demo directory for personal education.
+
+  b) Participate in CTF (Capture The Flag) challenges
+     published in this repository.
+
+  c) Reference and cite this Work in academic papers,
+     research, or educational materials, provided that
+     full attribution is given to Dumitru Nechita and
+     a link to this repository is included.
+
+  d) Share links to this repository publicly.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+SECTION 3 — PROHIBITED USE
+
+You ARE NOT permitted to:
+
+  a) Use any part of this Work in any commercial product,
+     service, or system without a separate written commercial
+     license agreement signed by Dumitru Nechita.
+
+  b) Reverse engineer, decompile, or attempt to reconstruct
+     any redacted, proprietary, or non-disclosed components
+     of the D00MGATE-NECH9 protocol.
+
+  c) Create derivative works based on the architecture,
+     concepts, naming, or design of this protocol.
+
+  d) Sublicense, sell, rent, lease, or otherwise transfer
+     rights to this Work or any portion thereof.
+
+  e) Remove or alter any copyright notices, license notices,
+     or attribution statements in the Work.
+
+  f) Use the name "D00MGATE", "NECH9", "D00MGATE-NECH9",
+     "Four Races Architecture", "Nechita Seal", or any
+     confusingly similar name in any product or service.
+
+  g) Train artificial intelligence or machine learning models
+     on the proprietary concepts described in this Work
+     without explicit written permission.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+SECTION 4 — COMMERCIAL LICENSING
+
+Organizations or individuals wishing to use D00MGATE-NECH9
+concepts in commercial applications must obtain a separate
+Commercial License Agreement.
+
+Commercial licenses are available on a case-by-case basis.
+Contact: via GitHub profile @nDumitru
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+SECTION 5 — NO WARRANTY
+
+THE WORK IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED. THE AUTHOR SHALL NOT BE LIABLE FOR ANY
+DAMAGES ARISING FROM USE OF THE WORK.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+SECTION 6 — GOVERNING LAW
+
+This license shall be governed by the laws of Romania,
+with jurisdiction in Brașov County Court.
+
+International users are subject to their local intellectual
+property laws in addition to this license.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Dumitru Nechita
+Brașov, Romania
+2026
+
+"The gate is open. The address is mine."
